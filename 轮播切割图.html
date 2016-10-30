@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            text-decoration: none;
+            list-style: none;
+        }
+
+        .view {
+            width: 560px;
+            height: 300px;
+            border: 1px solid #3CBD58;
+            background-color: #5CADFF;
+            margin: 100px auto;
+            position: relative;
+        }
+
+        li {
+            width: 112px;
+            height: 300px;
+            float: left;
+            transform-style: preserve-3d;
+            position: relative;
+            /*transform: rotateX(30deg) rotateY(-30deg);*/
+            transition: all 1s;
+        }
+
+        li span {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transition: all 1s;
+        }
+
+        li span:nth-child(1) {
+            transform: translateZ(150px);
+            background: url("images/1.jpg");
+        }
+
+        li span:nth-child(2) {
+            transform: rotateX(90deg) translateZ(150px);
+            background: url("images/2.jpg");
+        }
+
+        li span:nth-child(3) {
+            transform: rotateX(180deg) translateZ(150px);
+            background: url("images/3.jpg");
+        }
+
+        li span:nth-child(4) {
+            transform: rotateX(-90deg) translateZ(150px);
+            background: url("images/4.jpg");
+        }
+
+        ul li:nth-child(2) span {
+            background-position: -112px 0;
+        }
+
+        ul li:nth-child(3) span {
+            background-position: -224px 0;
+        }
+
+        ul li:nth-child(4) span {
+            background-position: -336px 0;
+        }
+
+        ul li:nth-child(5) span {
+            background-position: -448px 0;
+        }
+
+        a {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            font-size: 25px;
+            background-color: #2AB561;
+            color: white;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: center;
+            line-height: 30px;
+        }
+
+        .next {
+            left: auto;
+            right: 0px;
+        }
+    </style>
+</head>
+<body>
+<div class="view">
+    <ul>
+        <li>
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+        </li>
+        <li>
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+        </li>
+        <li>
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+        </li>
+        <li>
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+        </li>
+        <li>
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+        </li>
+    </ul>
+    <a href="javascript:;" class="prev">&lt;</a>
+    <a href="javascript:;" class="next">&gt;</a>
+</div>
+<script src="js/jquery.min.js"></script>
+<script>
+    $(function () {
+        var left = document.querySelector(".prev");
+        var right = document.querySelector(".next");
+
+        var idex = 0;
+
+        var flag = true
+
+        left.onclick = function () {
+
+            if (flag) {
+
+                flag=false;
+                idex++;
+                var r = 90 * idex;
+                $("li").css("transform", "rotateX(" + r + "deg)")
+
+                $("li").each(function (idex, item) {
+
+                    $(item).css("transition-delay", idex * 0.25 + "s")
+                })
+            }
+
+        }
+
+
+        right.onclick = function () {
+
+            if(flag){
+                flag=false;
+                idex--;
+                var r = 90 * idex;
+                $("li").css("transform", "rotateX(" + r + "deg)")
+
+                $("li").each(function (idex, item) {
+
+                    $(item).css("transition-delay", idex * 0.25 + "s")
+                })
+            }
+
+        }
+
+        $("li").eq(4).on("webkitTransitionEnd", function () {
+            flag = true
+        })
+
+
+    })
+</script>
+</body>
+</html>
